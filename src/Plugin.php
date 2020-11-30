@@ -41,8 +41,8 @@ final class Plugin {
 		// Load plugin text domain.
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 		add_action( 'init', array( $this, 'update_last_login' ) );
-		add_action( 'init', array( $this, 'schedule_inactive_notification' ) );
-		add_action( 'schedule_inactive_notification', array( $this, 'send' ) );
+		add_action( 'init', array( $this, 'schedule_notification' ) );
+		add_action( 'cb_schedule_notification', array( $this, 'send' ) );
 	}
 
 	/**
@@ -84,10 +84,10 @@ final class Plugin {
 	 * 
 	 * @return String
 	 */
-	public function schedule_inactive_notification( ) {
+	public function schedule_notification( ) {
 
-		if ( false === as_next_scheduled_action( 'schedule_inactive_notification' ) ) { 
-			as_schedule_recurring_action( strtotime( '+ 1 day' ), DAY_IN_SECONDS, 'schedule_inactive_notification' );
+		if ( false === as_next_scheduled_action( 'cb_schedule_notification' ) ) { 
+			as_schedule_recurring_action( strtotime( '+ 1 day' ), DAY_IN_SECONDS, 'cb_schedule_notification', array(), 'come_back' );
 		}
 	}
 
