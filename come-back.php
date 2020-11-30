@@ -1,0 +1,42 @@
+<?php
+/**
+ * Plugin Name: Come Back!
+ * Description: Sends email notification to inactive customers. Bring them back.
+ * Version: 1.0.0
+ * Author: Sanjeev Aryal
+ * Author URI: http://www.sanjeebaryal.com.np
+ * Text Domain: come-back
+ * Domain Path: /languages/
+ *
+ * @package    Come Back
+ * @author     Sanjeev Aryal
+ * @since      1.0.0
+ * @license    GPL-3.0+
+ */
+
+defined( 'ABSPATH' ) || exit;	// Exit if accessed directly.
+
+define( 'COME_BACK', __FILE__ );
+
+/**
+ * Plugin version.
+ *
+ * @var string
+ */
+const COME_BACK_VERSION = '1.0.0';
+
+require_once 'vendor/autoload.php';
+require_once( 'wp-content/plugins/action-scheduler/action-scheduler.php' );
+
+/**
+ * Return the main instance of Plugin Class.
+ *
+ * @since  1.2.0
+ *
+ * @return Plugin.
+ */
+function come_back() {
+	return \ComeBack\Plugin::get_instance();
+}
+
+come_back();
