@@ -42,6 +42,7 @@ final class Plugin {
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 		add_action( 'init', array( $this, 'update_last_login' ) );
 		add_action( 'init', array( $this, 'schedule_notification' ) );
+		add_action( 'init', array ( $this, 'register_admin_area' ) );
 		add_action( 'cb_schedule_notification', array( $this, 'process_send' ) );
 	}
 
@@ -59,6 +60,17 @@ final class Plugin {
 
 		load_textdomain( 'come-back', WP_LANG_DIR . '/come-back/come-back-' . $locale . '.mo' );
 		load_plugin_textdomain( 'come-back', false, plugin_basename( dirname( COME_BACK ) ) . '/languages' );
+	}
+
+	/**
+	 * Register admin area.
+	 *
+	 * @since 1.1.0
+	 */
+	public function register_admin_area() {
+
+		$settings = new Settings();
+		$settings->init();
 	}
 
 	/**
