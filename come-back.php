@@ -40,3 +40,15 @@ function come_back() {
 }
 
 come_back();
+
+/**
+ * Add current time on plugin activation.
+ *
+ * @since  1.0.0
+ * 
+ * @return void.
+ */
+function come_back_activate() {
+	update_option( 'come_back_activation_date', time() );
+}
+register_activation_hook( __FILE__, 'come_back_activate' );

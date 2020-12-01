@@ -42,7 +42,7 @@ final class Plugin {
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 		add_action( 'init', array( $this, 'update_last_login' ) );
 		add_action( 'init', array( $this, 'schedule_notification' ) );
-		add_action( 'cb_schedule_notification', array( $this, 'send' ) );
+		add_action( 'cb_schedule_notification', array( $this, 'process_send' ) );
 	}
 
 	/**
@@ -92,13 +92,24 @@ final class Plugin {
 	}
 
 	/**
-	 * Delete Inactive Accounts.
+	 * Send Inactive Notification.
 	 *
 	 * @since  1.0.0
 	 * 
 	 * @return string
 	 */
-	public function send() {
+	public function process_send() {
 
+		$user_id      			= get_current_user_id();
+		$last_login   			= get_user_meta( $user_id, 'last_login' );
+		$plugin_activation_date = get_option( 'come_back_activation_date' );
+
+		// Last login time is less than the current time minus the inactivity days to send emails.
+		if ( ! empty( $last_login ) && $last_login < time() - strtotime( '+'. $day . 'day' ) ) {
+
+		// Plugin activation time is less than the current time minus the inactivity days to send emails. Suitable for users that are not logged in since the plugin activation.
+		} elseif ( $plugin_activation_date < time() - strtotime( '+'. $day . 'day' ) ) {
+
+		}
 	}
 }
