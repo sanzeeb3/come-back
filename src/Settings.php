@@ -68,6 +68,7 @@ class Settings {
 		}
 		
 		$inactivity_period = get_option( 'come_back_inactivity_period', 90 );
+		$email_message     = get_option( 'come_back_email_message', 90 );
 
 		?>
 		<h2><?php esc_html_e( 'General Settings', 'come-back' ); ?></h2><hr/>
@@ -79,6 +80,28 @@ class Settings {
 						<td>
 							<input style="width:auto" type="number" name="come_back_inactivity_period" value=<?php echo $inactivity_period;?> />
 						</td>
+				</tr>
+
+				<tr valign="top" class="come-back-email-message">
+					<th scope="row"><?php echo esc_html__( 'Email Message:', 'wp-frontend-delete-account' ); ?></th>
+						<td>
+							<?php 
+								
+								$email_message   = '';
+								$editor_id = 'come-back-email-editor';
+								$args = array(
+								        'media_buttons' => false
+									);
+								?> 
+
+								<?php wp_editor( $email_message, $editor_id, $args );
+							?>
+						</td>
+						<style>
+							#wp-come-back-email-editor-wrap {
+								width: 80%;
+							}
+						</style>
 				</tr>
 
 			</table>
