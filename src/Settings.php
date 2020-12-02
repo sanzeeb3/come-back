@@ -68,7 +68,9 @@ class Settings {
 		}
 		
 		$inactivity_period = get_option( 'come_back_inactivity_period', 90 );
-		$email_message     = get_option( 'come_back_email_message', 90 );
+		$email_subject     = get_option( 'come_back_email_subject', esc_html__( 'Come Back!', 'come-back' ) );
+		$message           = 'We haven\'t seen you in a while. Things are a lot different since the last time you logged into {site_name}. I\'m {name}, CEO of {site_name}. I wanted to send you a note since you have been inactive for a while. You can come back and continue your awesome works at {site_name}.<br/><br/>Please come back!';
+		$email_message     = get_option( 'come_back_email_message', $message );
 
 		?>
 		<h2><?php esc_html_e( 'General Settings', 'come-back' ); ?></h2><hr/>
@@ -78,7 +80,14 @@ class Settings {
 				<tr valign="top" class="come-back-inactivity-period">
 					<th scope="row"><?php echo esc_html__( 'Send email to user after inactive days:', 'wp-frontend-delete-account' ); ?></th>
 						<td>
-							<input style="width:auto" type="number" name="come_back_inactivity_period" value=<?php echo $inactivity_period;?> />
+							<input style="width:auto" type="number" name="come_back_inactivity_period" value="<?php echo $inactivity_period;?>" />
+						</td>
+				</tr>
+
+				<tr valign="top" class="come-back-email-subject">
+					<th scope="row"><?php echo esc_html__( 'Email Subject:', 'come-back' ); ?></th>
+						<td>
+							<input style="width:auto" type="text" name="come_back_email_subject" value="<?php echo $email_subject;?>" />
 						</td>
 				</tr>
 
@@ -86,8 +95,7 @@ class Settings {
 					<th scope="row"><?php echo esc_html__( 'Email Message:', 'wp-frontend-delete-account' ); ?></th>
 						<td>
 							<?php 
-								
-								$email_message   = '';
+
 								$editor_id = 'come-back-email-editor';
 								$args = array(
 								        'media_buttons' => false
