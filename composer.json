@@ -1,6 +1,6 @@
 {
   "name": "sanzeeb3/come-back",
-  "description": "Send email notification to inactive customers. Bring them back.",
+  "description": "Send email notification to inactive customers.",
   "homepage": "https://github.com/sanzeeb3/come-back",
   "type": "wordpress-plugin",
   "license": "GPL-3.0-or-later",

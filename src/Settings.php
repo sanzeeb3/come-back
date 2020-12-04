@@ -22,6 +22,7 @@ class Settings {
 		add_action( 'admin_init', array( $this, 'save_settings' ) );
 		add_filter( 'admin_footer_text', array( $this, 'get_admin_footer' ), 1, 2 );
 		add_action( 'admin_print_scripts', array( $this, 'remove_notices' ) );
+		add_action( 'come_back_process_smart_tags', [ $this, 'process_smart_tags'] );
 	}
 
 	/**
@@ -69,6 +70,7 @@ class Settings {
 		
 		$inactivity_period = get_option( 'come_back_inactivity_period', 90 );
 		$email_subject     = get_option( 'come_back_email_subject', esc_html__( 'Come Back!', 'come-back' ) );
+
 		$message           = 'We haven\'t seen you in a while. Things are a lot different since the last time you logged into {site_name}. I\'m {name}, CEO of {site_name}. I wanted to send you a note since you have been inactive for a while. You can come back and continue your awesome works at {site_name}.<br/><br/>Please come back!';
 		$email_message     = get_option( 'come_back_email_message', $message );
 
@@ -113,6 +115,7 @@ class Settings {
 				</tr>
 
 			</table>
+			<?php wp_nonce_field( 'come_back_settings', 'come_back_settings_nonce' ); ?>
 			<?php submit_button(); ?>
 		</form>
 		<?php
@@ -125,16 +128,39 @@ class Settings {
 	 */
 	public function save_settings() {
 
-		if ( ! isset( $_POST['come-back-submit'] ) ) {
+		if ( ! isset( $_POST['submit'] ) ) {
 			return;
 		}
 
 		if (
-			! isset( $_POST['come_back_nonce_field'] ) ||
-			! wp_verify_nonce( $_POST['come_back_nonce_field'], 'come_back_settings_save' )
+			! isset( $_POST['come_back_settings_nonce'] ) ||
+			! wp_verify_nonce( $_POST['come_back_settings_nonce'], 'come_back_settings' )
 		) {
 			return;
 		}
+
+		$options = array( 'come_back_inactivity_period', 'come_back_email_subject', 'come_back_email_message' );
+
+			foreach ( $options as $option ) {
+				if ( isset( $_POST[ $option ] ) ) {
+		
+					$value = sanitize_text_field( $_POST[ $option ] );
+		
+					update_option( $option, $value );
+				}
+			}
+	}
+
+	/**
+	 * Process smart tags.
+	 * 
+	 * @since 1.0.0
+	 */
+	public function process_smart_tags( $content ) {
+
+		$content = str_replace( '{site_name}', get_bloginfo(), $content );
+
+		return $content;
 	}
 
 	/**

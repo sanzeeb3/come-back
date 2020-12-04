@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Come Back!
- * Description: Sends email notification to inactive customers. Bring them back.
+ * Description: Sends email notification to inactive customers.
  * Version: 1.0.0
  * Author: Sanjeev Aryal
  * Author URI: http://www.sanjeebaryal.com.np
