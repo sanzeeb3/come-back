@@ -112,16 +112,27 @@ final class Plugin {
 	 */
 	public function process_send() {
 
-		$user_id      			= get_current_user_id();
-		$last_login   			= get_user_meta( $user_id, 'last_login' );
+
 		$plugin_activation_date = get_option( 'come_back_activation_date' );
 
-		// Last login time is less than the current time minus the inactivity days to send emails.
-		if ( ! empty( $last_login ) && $last_login < time() - strtotime( '+'. $day . 'day' ) ) {
+
+
+		$user_id      			= get_current_user_id();	
+		$last_login   			= get_user_meta( $user_id, 'last_login' );
+		$come_back_email_sent   = get_user_meta( $user_id, 'come_back_email_sent' );
+
+		// Condition 1: Last login time is less than the current time minus the inactivity days to send emails.
+		// Condition 2: Come Back email is already sent. Send it again after 30 days.
+		// Condition 3: If there is no last_login, send email based on plugin activation date. For inactive users before Come Back Installation.
+
+		if ( ! empty( $last_login ) && $last_login < time() - strtotime( '+'. $day . 'day' ) 
+			|| ( ! empty( $come_back_email_sent ) && $come_back_email_sent < time() - strtotime( '+ 30 day' ) ) && ( ! empty( $last_login ) && $last_login < time() - strtotime( '+ 30 day' ) )
+			|| $plugin_activation_date < time() - strtotime( '+'. $day . 'day' )
+		) {
+
+			update_user_meta( $user_id, 'come_back_email_sent', time() );
 
 		// Plugin activation time is less than the current time minus the inactivity days to send emails. Suitable for users that are not logged in since the plugin activation.
-		} elseif ( $plugin_activation_date < time() - strtotime( '+'. $day . 'day' ) ) {
-
 		}
 	}
 }

@@ -80,7 +80,7 @@ class Settings {
 			<table class="form-table">
 
 				<tr valign="top" class="come-back-inactivity-period">
-					<th scope="row"><?php echo esc_html__( 'Send email to user after inactive days:', 'wp-frontend-delete-account' ); ?></th>
+					<th scope="row"><?php echo esc_html__( 'Send email to user after inactive days:', 'come-back' ); ?></th>
 						<td>
 							<input style="width:auto" type="number" name="come_back_inactivity_period" value="<?php echo $inactivity_period;?>" />
 						</td>
@@ -94,7 +94,7 @@ class Settings {
 				</tr>
 
 				<tr valign="top" class="come-back-email-message">
-					<th scope="row"><?php echo esc_html__( 'Email Message:', 'wp-frontend-delete-account' ); ?></th>
+					<th scope="row"><?php echo esc_html__( 'Email Message:', 'come-back' ); ?></th>
 						<td>
 							<?php 
 
