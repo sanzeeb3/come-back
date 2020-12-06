@@ -123,13 +123,13 @@ final class Plugin {
 		$message       = 'We haven\'t seen you in a while. Things are a lot different since the last time you logged into {site_name}. I\'m {name}, CEO of {site_name}. I wanted to send you a note since you have been inactive for a while. You can come back and continue your awesome works at {site_name}.<br/><br/>Please come back!';
 		$email_message = get_option( 'come-back-email-editor', $message );
 
-		// Condition 1: Last login time is less than the current time minus the inactivity days to send emails.
-		// Condition 2: Come Back email is already sent. Send it again after 30 days, if the user do not log in again after the email is sent.
-		// Condition 3: If there is no last_login, send email based on plugin activation date. For inactive users before Come Back Installation.
-
 		$users = get_users();   // @TODO:: Improve query based on results.
 
 		foreach ( $users as $user ) {
+
+			// Condition 1: Last login time is less than the current time minus the inactivity days to send emails.
+			// Condition 2: Come Back email is already sent. Send it again after 30 days, if the user do not log in again after the email is sent.
+			// Condition 3: If there is no last_login, send email based on plugin activation date. For inactive users before Come Back Installation.
 
 			if ( ! empty( $last_login ) && $last_login < time() - strtotime( '+' . $inactivity_period . 'day' )
 				|| ( ! empty( $come_back_email_sent ) && $come_back_email_sent < time() - strtotime( '+ 30 day' ) ) && ( ! empty( $last_login ) && $last_login < time() - strtotime( '+ 30 day' ) )

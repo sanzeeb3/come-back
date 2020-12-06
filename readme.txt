@@ -1,7 +1,7 @@
 === Come Back! ===
 Contributors: sanzeeb3
 Tags: inactive, idle-users, notification
-Requires at least: 4.0
+Requires at least: 5.0
 Tested up to: 5.5.1
 Requires PHP: 5.6
 Stable tag: 1.0.0

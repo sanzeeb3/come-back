@@ -163,8 +163,9 @@ class Settings {
 					'b'      => array(),
 					'br'     => array(),
 					'p'      => array(),
+					'li' 	 => array(),
 					'em'     => array(),
-					'strong' => array(),
+					'strong' => array()
 				)
 			);
 
