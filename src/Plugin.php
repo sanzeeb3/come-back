@@ -2,7 +2,7 @@
 
 namespace ComeBack;
 
-defined( 'ABSPATH' ) || exit;	// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;   // Exit if accessed directly.
 
 /**
  * Plugin Class.
@@ -42,7 +42,7 @@ final class Plugin {
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 		add_action( 'init', array( $this, 'update_last_login' ) );
 		add_action( 'init', array( $this, 'schedule_notification' ) );
-		add_action( 'init', array ( $this, 'register_admin_area' ) );
+		add_action( 'init', array( $this, 'register_admin_area' ) );
 		add_action( 'cb_schedule_notification', array( $this, 'process_send' ) );
 	}
 
@@ -85,7 +85,7 @@ final class Plugin {
 		$user_id = get_current_user_id();
 
 		if ( $user_id ) {
-			update_user_meta( $user_id, 'last_login', time() ); 
+			update_user_meta( $user_id, 'last_login', time() );
 		}
 	}
 
@@ -93,46 +93,53 @@ final class Plugin {
 	 * Schedule to send inactive notification.
 	 *
 	 * @since  1.0.0
-	 * 
+	 *
 	 * @return String
 	 */
-	public function schedule_notification( ) {
+	public function schedule_notification() {
 
-		if ( false === as_next_scheduled_action( 'cb_schedule_notification' ) ) { 
+		if ( false === as_next_scheduled_action( 'cb_schedule_notification' ) ) {
 			as_schedule_recurring_action( strtotime( '+ 1 day' ), DAY_IN_SECONDS, 'cb_schedule_notification', array(), 'come_back' );
 		}
 	}
 
 	/**
-	 * Send Inactive Notification.
+	 * Process Sending Inactive Notification.
 	 *
 	 * @since  1.0.0
-	 * 
+	 *
 	 * @return string
 	 */
 	public function process_send() {
 
-
 		$plugin_activation_date = get_option( 'come_back_activation_date' );
+		$email_subject          = get_option( 'come_back_email_subject', esc_html__( 'Come Back!', 'come-back' ) );
+		$inactivity_period      = get_option( 'come_back_inactivity_period', 90 );
 
+		$user_id              = get_current_user_id();
+		$last_login           = get_user_meta( $user_id, 'last_login' );
+		$come_back_email_sent = get_user_meta( $user_id, 'come_back_email_sent' );
 
-
-		$user_id      			= get_current_user_id();	
-		$last_login   			= get_user_meta( $user_id, 'last_login' );
-		$come_back_email_sent   = get_user_meta( $user_id, 'come_back_email_sent' );
+		$message       = 'We haven\'t seen you in a while. Things are a lot different since the last time you logged into {site_name}. I\'m {name}, CEO of {site_name}. I wanted to send you a note since you have been inactive for a while. You can come back and continue your awesome works at {site_name}.<br/><br/>Please come back!';
+		$email_message = get_option( 'come-back-email-editor', $message );
 
 		// Condition 1: Last login time is less than the current time minus the inactivity days to send emails.
-		// Condition 2: Come Back email is already sent. Send it again after 30 days.
+		// Condition 2: Come Back email is already sent. Send it again after 30 days, if the user do not log in again after the email is sent.
 		// Condition 3: If there is no last_login, send email based on plugin activation date. For inactive users before Come Back Installation.
 
-		if ( ! empty( $last_login ) && $last_login < time() - strtotime( '+'. $day . 'day' ) 
-			|| ( ! empty( $come_back_email_sent ) && $come_back_email_sent < time() - strtotime( '+ 30 day' ) ) && ( ! empty( $last_login ) && $last_login < time() - strtotime( '+ 30 day' ) )
-			|| $plugin_activation_date < time() - strtotime( '+'. $day . 'day' )
-		) {
+		$users = get_users();   // @TODO:: Improve query based on results.
 
-			update_user_meta( $user_id, 'come_back_email_sent', time() );
+		foreach ( $users as $user ) {
 
-		// Plugin activation time is less than the current time minus the inactivity days to send emails. Suitable for users that are not logged in since the plugin activation.
+			if ( ! empty( $last_login ) && $last_login < time() - strtotime( '+' . $inactivity_period . 'day' )
+				|| ( ! empty( $come_back_email_sent ) && $come_back_email_sent < time() - strtotime( '+ 30 day' ) ) && ( ! empty( $last_login ) && $last_login < time() - strtotime( '+ 30 day' ) )
+				|| $plugin_activation_date < time() - strtotime( '+' . $inactivity_period . 'day' )
+			) {
+
+				update_user_meta( $user->ID, 'come_back_email_sent', time() );
+
+				wp_mail( $user->user_email, $subject, $email_message );
+			}
 		}
 	}
 }

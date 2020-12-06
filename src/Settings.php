@@ -22,7 +22,7 @@ class Settings {
 		add_action( 'admin_init', array( $this, 'save_settings' ) );
 		add_filter( 'admin_footer_text', array( $this, 'get_admin_footer' ), 1, 2 );
 		add_action( 'admin_print_scripts', array( $this, 'remove_notices' ) );
-		add_action( 'come_back_process_smart_tags', [ $this, 'process_smart_tags'] );
+		add_action( 'come_back_process_smart_tags', array( $this, 'process_smart_tags' ) );
 	}
 
 	/**
@@ -67,12 +67,12 @@ class Settings {
 		if ( ! $this->is_admin_screen() ) {
 			return;
 		}
-		
+
 		$inactivity_period = get_option( 'come_back_inactivity_period', 90 );
 		$email_subject     = get_option( 'come_back_email_subject', esc_html__( 'Come Back!', 'come-back' ) );
 
-		$message           = 'We haven\'t seen you in a while. Things are a lot different since the last time you logged into {site_name}. I\'m {name}, CEO of {site_name}. I wanted to send you a note since you have been inactive for a while. You can come back and continue your awesome works at {site_name}.<br/><br/>Please come back!';
-		$email_message     = get_option( 'come-back-email-editor', $message );
+		$message       = 'We haven\'t seen you in a while. Things are a lot different since the last time you logged into {site_name}. I\'m {name}, CEO of {site_name}. I wanted to send you a note since you have been inactive for a while. You can come back and continue your awesome works at {site_name}.<br/><br/>Please come back!';
+		$email_message = get_option( 'come-back-email-editor', $message );
 
 		?>
 		<h2><?php esc_html_e( 'General Settings', 'come-back' ); ?></h2><hr/>
@@ -82,30 +82,32 @@ class Settings {
 				<tr valign="top" class="come-back-inactivity-period">
 					<th scope="row"><?php echo esc_html__( 'Send email to user after inactive days:', 'come-back' ); ?></th>
 						<td>
-							<input style="width:auto" type="number" name="come_back_inactivity_period" value="<?php echo $inactivity_period;?>" />
+							<input style="width:auto" type="number" name="come_back_inactivity_period" value="<?php echo $inactivity_period; ?>" />
 						</td>
 				</tr>
 
 				<tr valign="top" class="come-back-email-subject">
 					<th scope="row"><?php echo esc_html__( 'Email Subject:', 'come-back' ); ?></th>
 						<td>
-							<input style="width:auto" type="text" name="come_back_email_subject" value="<?php echo $email_subject;?>" />
+							<input style="width:auto" type="text" name="come_back_email_subject" value="<?php echo $email_subject; ?>" />
 						</td>
 				</tr>
 
 				<tr valign="top" class="come-back-email-message">
 					<th scope="row"><?php echo esc_html__( 'Email Message:', 'come-back' ); ?></th>
 						<td>
-							<?php 
+							<?php
 
 								$editor_id = 'come-back-email-editor';
-								$args = array(
-								        'media_buttons' => false
-									);
-								?> 
+								$args      = array(
+									'media_buttons' => false,
+								);
+								?>
+								 
 
-								<?php wp_editor( $email_message, $editor_id, $args );
-							?>
+								<?php
+								wp_editor( $email_message, $editor_id, $args );
+								?>
 						</td>
 						<style>
 							#wp-come-back-email-editor-wrap {
@@ -139,21 +141,40 @@ class Settings {
 			return;
 		}
 
-		$options = array( 'come_back_inactivity_period', 'come_back_email_subject', 'come-back-email-editor' );
+		$options = array( 'come_back_inactivity_period', 'come_back_email_subject' );
 
-			foreach ( $options as $option ) {
-				if ( isset( $_POST[ $option ] ) ) {
-		
-					$value = sanitize_text_field( $_POST[ $option ] );
-		
-					update_option( $option, $value );
-				}
+		foreach ( $options as $option ) {
+			if ( isset( $_POST[ $option ] ) ) {
+
+				$value = sanitize_text_field( $_POST[ $option ] );
+
+				update_option( $option, $value );
 			}
+		}
+
+		if ( isset( $_POST ['come-back-email-editor'] ) ) {
+			$editor = wp_kses(
+				$_POST['come-back-email-editor'],
+				array(
+					'a'      => array(
+						'href'  => array(),
+						'title' => array(),
+					),
+					'b'      => array(),
+					'br'     => array(),
+					'p'      => array(),
+					'em'     => array(),
+					'strong' => array(),
+				)
+			);
+
+			update_option( 'come-back-email-editor', $editor );
+		}
 	}
 
 	/**
 	 * Process smart tags.
-	 * 
+	 *
 	 * @since 1.0.0
 	 */
 	public function process_smart_tags( $content ) {
