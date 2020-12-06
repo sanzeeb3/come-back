@@ -46,8 +46,7 @@ module.exports = function( grunt ){
 					'!composer.lock',
 					'!node_modules/**',
 					'!package-lock.json',
-					'!vendor/composer/installers/**',
-					'!wp-content/**'
+					'!vendor/composer/installers/**'
 				],
 				dest: '<%= pkg.name %>',
 				expand: true
