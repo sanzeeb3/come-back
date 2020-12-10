@@ -133,7 +133,7 @@ final class Plugin {
 
 			if ( ! empty( $last_login ) && $last_login < ( strtotime( '-' . $inactivity_period . 'day' ) )
 				|| ( ! empty( $come_back_email_sent ) && $come_back_email_sent < ( strtotime( '- 30 day' ) ) ) && ( ! empty( $last_login ) && $last_login < ( strtotime( '- 30 day' ) ) )
-				|| empty( $last_login ) && $plugin_activation_date > ( strtotime( '-' . $inactivity_period . 'day' ) )
+				|| empty( $last_login ) && $plugin_activation_date < ( strtotime( '-' . $inactivity_period . 'day' ) )
 			) {
 
 				update_user_meta( $user->ID, 'come_back_email_sent', time() );
