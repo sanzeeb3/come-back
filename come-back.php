@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Come Back!
  * Description: Sends email notification to inactive customers.
- * Version: 1.0.0
+ * Version: 1.1.0
  * Author: Sanjeev Aryal
  * Author URI: http://www.sanjeebaryal.com.np
  * Text Domain: come-back
@@ -23,7 +23,7 @@ define( 'COME_BACK', __FILE__ );
  *
  * @var string
  */
-const COME_BACK_VERSION = '1.0.0';
+const COME_BACK_VERSION = '1.1.0';
 
 require_once 'vendor/autoload.php';
 require_once( 'wp-content/plugins/action-scheduler/action-scheduler.php' );
