@@ -116,9 +116,6 @@ final class Plugin {
 		$email_subject          = get_option( 'come_back_email_subject', esc_html__( 'Come Back!', 'come-back' ) );
 		$inactivity_period      = get_option( 'come_back_inactivity_period', 90 );
 
-		$user_id              = get_current_user_id();
-		$last_login           = get_user_meta( $user_id, 'last_login' );
-		$come_back_email_sent = get_user_meta( $user_id, 'come_back_email_sent' );
 
 		$message       = 'We haven\'t seen you in a while. Things are a lot different since the last time you logged into {site_name}. I\'m {name}, CEO of {site_name}. I wanted to send you a note since you have been inactive for a while. You can come back and continue your awesome works at {site_name}.<br/><br/>Please come back!';
 		$email_message = get_option( 'come-back-email-editor', $message );
@@ -126,19 +123,22 @@ final class Plugin {
 		$users = get_users();   // @TODO:: Improve query based on results.
 
 		foreach ( $users as $user ) {
+		
+			$last_login           = get_user_meta( $user->ID, 'last_login', true );
+			$come_back_email_sent = get_user_meta( $user->ID, 'come_back_email_sent', true );
 
 			// Condition 1: Last login time is less than the current time minus the inactivity days to send emails.
 			// Condition 2: Come Back email is already sent. Send it again after 30 days, if the user do not log in again after the email is sent.
 			// Condition 3: If there is no last_login, send email based on plugin activation date. For inactive users before Come Back Installation.
 
-			if ( ! empty( $last_login ) && $last_login < time() - strtotime( '+' . $inactivity_period . 'day' )
-				|| ( ! empty( $come_back_email_sent ) && $come_back_email_sent < time() - strtotime( '+ 30 day' ) ) && ( ! empty( $last_login ) && $last_login < time() - strtotime( '+ 30 day' ) )
-				|| $plugin_activation_date < time() - strtotime( '+' . $inactivity_period . 'day' )
+			if ( ! empty( $last_login ) && $last_login < ( strtotime( '-' . $inactivity_period . 'day' ) )
+				|| ( ! empty( $come_back_email_sent ) && $come_back_email_sent < ( strtotime( '- 30 day' ) ) ) && ( ! empty( $last_login ) && $last_login < ( strtotime( '- 30 day' ) ) )
+				|| empty( $last_login ) && $plugin_activation_date > ( strtotime( '-' . $inactivity_period . 'day' ) )
 			) {
 
 				update_user_meta( $user->ID, 'come_back_email_sent', time() );
 
-				wp_mail( $user->user_email, $subject, $email_message );
+				wp_mail( $user->user_email, $email_subject, $email_message );
 			}
 		}
 	}
