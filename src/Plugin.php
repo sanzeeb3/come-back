@@ -138,7 +138,9 @@ final class Plugin {
 
 				update_user_meta( $user->ID, 'come_back_email_sent', time() );
 
-				wp_mail( $user->user_email, $email_subject, $email_message );
+				$headers = array('Content-Type: text/html; charset=UTF-8');
+
+				wp_mail( $user->user_email, $email_subject, $email_message, $headers );
 			}
 		}
 	}
