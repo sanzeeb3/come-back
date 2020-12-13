@@ -14,7 +14,7 @@ Send rearrangement emails to inactive customers. Bring them back.
 
 Come Back! sends an automatic email notification to inactive customers to bring your **LOST** customers back. Inactivity is based on logging in.
 
-Create special re-engagement emails targeted directly at your “inactive” customers. Customer inactivity is a fact of life. How you handle it makes all the difference.Ho
+Create special re-engagement emails targeted directly at your “inactive” customers. Customer inactivity is a fact of life. How you handle it makes all the difference.
 
 **Sample Email:**
 
