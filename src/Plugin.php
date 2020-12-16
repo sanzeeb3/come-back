@@ -151,6 +151,8 @@ final class Plugin {
 	/**
 	 * Process smart tags.
 	 *
+	 * @todo :: test and optimize the performance wherever possible.
+	 *
 	 * @since 1.0.0
 	 */
 	public function process_smart_tags( $content, $user ) {

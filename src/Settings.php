@@ -107,14 +107,16 @@ class Settings {
 								<?php
 								wp_editor( $email_message, $editor_id, $args );
 								?>
-						</td>
+						<br/>	
+						<b><?php echo __( 'Pro Tip:', 'come-back');?></b>
+						<em> <?php echo sprintf( __( 'There are helpful %1s that you can use on the email subject and email message.', 'come-back' ), '<a href="http://sanjeebaryal.com.np" target="_blank"><strong>Smart Tags</strong></a>' ); ?> </em>
+					</td>
 						<style>
 							#wp-come-back-email-editor-wrap {
 								width: 80%;
 							}
 						</style>
 				</tr>
-
 			</table>
 			<?php wp_nonce_field( 'come_back_settings', 'come_back_settings_nonce' ); ?>
 			<?php submit_button(); ?>
