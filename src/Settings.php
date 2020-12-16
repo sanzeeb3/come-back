@@ -22,7 +22,6 @@ class Settings {
 		add_action( 'admin_init', array( $this, 'save_settings' ) );
 		add_filter( 'admin_footer_text', array( $this, 'get_admin_footer' ), 1, 2 );
 		add_action( 'admin_print_scripts', array( $this, 'remove_notices' ) );
-		add_action( 'come_back_process_smart_tags', array( $this, 'process_smart_tags' ) );
 	}
 
 	/**
@@ -173,18 +172,6 @@ class Settings {
 
 			update_option( 'come-back-email-editor', $editor );
 		}
-	}
-
-	/**
-	 * Process smart tags.
-	 *
-	 * @since 1.0.0
-	 */
-	public function process_smart_tags( $content ) {
-
-		$content = str_replace( '{site_name}', get_bloginfo(), $content );
-
-		return $content;
 	}
 
 	/**
