@@ -32,7 +32,7 @@ require_once( 'wp-content/plugins/action-scheduler/action-scheduler.php' );
 /**
  * Return the main instance of Plugin Class.
  *
- * @since  1.2.0
+ * @since  1.0.0
  *
  * @return Plugin.
  */
