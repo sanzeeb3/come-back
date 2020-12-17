@@ -164,11 +164,15 @@ class Settings {
 					'b'      => array(),
 					'br'     => array(),
 					'p'      => array(),
+					'pre' 	 => array(),
 					'ul'     => array(),
 					'li'     => array(),
 					'em'     => array(),
 					'strong' => array(),
-					'img'    => array(),
+					'img'    => array(
+						'src' => array(),
+						'alt' => array()
+					),
 				)
 			);
 
