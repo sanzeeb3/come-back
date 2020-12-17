@@ -102,13 +102,13 @@ class Settings {
 									'media_buttons' => false,
 								);
 								?>
-								 
+
 
 								<?php
 								wp_editor( $email_message, $editor_id, $args );
 								?>
 						<br/>	
-						<b><?php echo __( 'Pro Tip:', 'come-back');?></b>
+						<b><?php echo __( 'Pro Tip:', 'come-back' ); ?></b>
 						<em> <?php echo sprintf( __( 'There are helpful %1s that you can use on the email subject and email message.', 'come-back' ), '<a href="http://sanjeebaryal.com.np" target="_blank"><strong>Smart Tags</strong></a>' ); ?> </em>
 					</td>
 						<style>
@@ -147,7 +147,7 @@ class Settings {
 		foreach ( $options as $option ) {
 			if ( isset( $_POST[ $option ] ) ) {
 
-				$value = sanitize_text_field( $_POST[ $option ] );
+				$value = sanitize_text_field( wp_unslash( $_POST[ $option ] ) );
 
 				update_option( $option, $value );
 			}
@@ -155,7 +155,7 @@ class Settings {
 
 		if ( isset( $_POST ['come-back-email-editor'] ) ) {
 			$editor = wp_kses(
-				$_POST['come-back-email-editor'],
+				wp_unslash( $_POST['come-back-email-editor'] ),
 				array(
 					'a'      => array(
 						'href'  => array(),
@@ -164,11 +164,11 @@ class Settings {
 					'b'      => array(),
 					'br'     => array(),
 					'p'      => array(),
-					'ul' 	 => array(),
-					'li' 	 => array(),
+					'ul'     => array(),
+					'li'     => array(),
 					'em'     => array(),
 					'strong' => array(),
-					'img' 	 => array()
+					'img'    => array(),
 				)
 			);
 
