@@ -34,7 +34,7 @@ final class Plugin {
 	}
 
 	/**
-	 * WP Inactive Delete Account Constructor.
+	 * Come Back Constructor.
 	 */
 	public function __construct() {
 
