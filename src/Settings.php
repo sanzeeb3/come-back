@@ -109,7 +109,7 @@ class Settings {
 								?>
 						<br/>	
 						<b><?php echo __( 'Pro Tip:', 'come-back' ); ?></b>
-						<em> <?php echo sprintf( __( 'There are helpful %1s that you can use on the email subject and email message.', 'come-back' ), '<a href="http://sanjeebaryal.com.np" target="_blank"><strong>Smart Tags</strong></a>' ); ?> </em>
+						<em> <?php echo sprintf( __( 'There are helpful %1s that you can use on the email subject and email message.', 'come-back' ), '<a href="http://sanjeebaryal.com.np/bring-your-lost-customers-back/" target="_blank"><strong>Smart Tags</strong></a>' ); ?> </em>
 					</td>
 						<style>
 							#wp-come-back-email-editor-wrap {
