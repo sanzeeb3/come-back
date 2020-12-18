@@ -22,7 +22,6 @@ class Settings {
 		add_action( 'admin_init', array( $this, 'save_settings' ) );
 		add_filter( 'admin_footer_text', array( $this, 'get_admin_footer' ), 1, 2 );
 		add_action( 'admin_print_scripts', array( $this, 'remove_notices' ) );
-		add_action( 'come_back_process_smart_tags', array( $this, 'process_smart_tags' ) );
 	}
 
 	/**
@@ -103,19 +102,21 @@ class Settings {
 									'media_buttons' => false,
 								);
 								?>
-								 
+
 
 								<?php
 								wp_editor( $email_message, $editor_id, $args );
 								?>
-						</td>
+						<br/>	
+						<b><?php echo __( 'Pro Tip:', 'come-back' ); ?></b>
+						<em> <?php echo sprintf( __( 'There are helpful %1s that you can use on the email subject and email message.', 'come-back' ), '<a href="http://sanjeebaryal.com.np/bring-your-lost-customers-back/" target="_blank"><strong>Smart Tags</strong></a>' ); ?> </em>
+					</td>
 						<style>
 							#wp-come-back-email-editor-wrap {
 								width: 80%;
 							}
 						</style>
 				</tr>
-
 			</table>
 			<?php wp_nonce_field( 'come_back_settings', 'come_back_settings_nonce' ); ?>
 			<?php submit_button(); ?>
@@ -146,7 +147,7 @@ class Settings {
 		foreach ( $options as $option ) {
 			if ( isset( $_POST[ $option ] ) ) {
 
-				$value = sanitize_text_field( $_POST[ $option ] );
+				$value = sanitize_text_field( wp_unslash( $_POST[ $option ] ) );
 
 				update_option( $option, $value );
 			}
@@ -154,7 +155,7 @@ class Settings {
 
 		if ( isset( $_POST ['come-back-email-editor'] ) ) {
 			$editor = wp_kses(
-				$_POST['come-back-email-editor'],
+				wp_unslash( $_POST['come-back-email-editor'] ),
 				array(
 					'a'      => array(
 						'href'  => array(),
@@ -163,28 +164,20 @@ class Settings {
 					'b'      => array(),
 					'br'     => array(),
 					'p'      => array(),
-					'ul' 	 => array(),
-					'li' 	 => array(),
+					'pre' 	 => array(),
+					'ul'     => array(),
+					'li'     => array(),
 					'em'     => array(),
 					'strong' => array(),
-					'img' 	 => array()
+					'img'    => array(
+						'src' => array(),
+						'alt' => array()
+					),
 				)
 			);
 
 			update_option( 'come-back-email-editor', $editor );
 		}
-	}
-
-	/**
-	 * Process smart tags.
-	 *
-	 * @since 1.0.0
-	 */
-	public function process_smart_tags( $content ) {
-
-		$content = str_replace( '{site_name}', get_bloginfo(), $content );
-
-		return $content;
 	}
 
 	/**

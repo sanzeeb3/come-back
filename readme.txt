@@ -30,7 +30,13 @@ Create special re-engagement emails targeted directly at your “inactive” cus
 
 == Frequently Asked Questions ==
 
-No questions so far.
+= How can I test the plugin?
+
+To verify the emails are actually sent, go to the Settings > Come Back! and enter 0 in the 'Send emails to user after inactive days' and then go to wp-admin/tools.php?page=action-scheduler, search for pending action 'cb_schedule_notification' and run. This will sent the email to all the users.
+
+= How can I add image in the email message?
+
+You can switch to 'Text' format in Tinymce editor in the settings and choose 'img' button. You'll need to enter the URL of the image and description of the image. That's it.
 
 == Changelog ==
 

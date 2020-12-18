@@ -34,7 +34,7 @@ final class Plugin {
 	}
 
 	/**
-	 * WP Inactive Delete Account Constructor.
+	 * Come Back Constructor.
 	 */
 	public function __construct() {
 
@@ -43,6 +43,7 @@ final class Plugin {
 		add_action( 'init', array( $this, 'update_last_login' ) );
 		add_action( 'init', array( $this, 'schedule_notification' ) );
 		add_action( 'init', array( $this, 'register_admin_area' ) );
+		add_action( 'come_back_process_smart_tags', array( $this, 'process_smart_tags' ), 10, 2 );
 		add_action( 'cb_schedule_notification', array( $this, 'process_send' ) );
 	}
 
@@ -116,16 +117,17 @@ final class Plugin {
 		$email_subject          = get_option( 'come_back_email_subject', esc_html__( 'Come Back!', 'come-back' ) );
 		$inactivity_period      = get_option( 'come_back_inactivity_period', 90 );
 
-
-		$message       = 'We haven\'t seen you in a while. Things are a lot different since the last time you logged into {site_name}. I\'m {name}, CEO of {site_name}. I wanted to send you a note since you have been inactive for a while. You can come back and continue your awesome works at {site_name}.<br/><br/>Please come back!';
-		$email_message = get_option( 'come-back-email-editor', $message );
+		$message = 'We haven\'t seen you in a while. Things are a lot different since the last time you logged into {site_name}. I\'m {name}, CEO of {site_name}. I wanted to send you a note since you have been inactive for a while. You can come back and continue your awesome works at {site_name}.<br/><br/>Please come back!';
 
 		$users = get_users();   // @TODO:: Improve query based on results.
 
 		foreach ( $users as $user ) {
-		
+
 			$last_login           = get_user_meta( $user->ID, 'last_login', true );
 			$come_back_email_sent = get_user_meta( $user->ID, 'come_back_email_sent', true );
+
+			$email_message = get_option( 'come-back-email-editor', $message );
+			$email_message = apply_filters( 'come_back_process_smart_tags', $email_message, $user );
 
 			// Condition 1: Last login time is less than the current time minus the inactivity days to send emails.
 			// Condition 2: Come Back email is already sent. Send it again after 30 days, if the user do not log in again after the email is sent.
@@ -143,5 +145,26 @@ final class Plugin {
 				wp_mail( $user->user_email, $email_subject, nl2br( $email_message ), $headers );
 			}
 		}
+	}
+
+	/**
+	 * Process smart tags.
+	 *
+	 * @todo :: test and optimize the performance wherever possible.
+	 *
+	 * @param  string $content The raw subject or email message.
+	 * @param  object $user The user object.
+	 *
+	 * @return Email Subject or Email message.
+	 *
+	 * @since 1.0.0
+	 */
+	public function process_smart_tags( $content, $user ) {
+
+		$content = str_replace( '{site_name}', get_bloginfo(), $content );
+		$content = str_replace( '{user_first_name}', get_user_meta( $user->ID, 'fist_name', true ), $content );
+		$content = str_replace( '{user_last_name}', get_user_meta( $user->ID, 'last_name', true ), $content );
+
+		return $content;
 	}
 }

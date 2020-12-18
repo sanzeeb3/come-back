@@ -1,7 +1,7 @@
 Welcome to the Come Back! repository on GitHub.
 
 ## Documentation
-* [Come Back! Documentation](http://sanjeebaryal.com.np/contact/)
+* [Come Back! Documentation](http://sanjeebaryal.com.np/bring-your-lost-customers-back/)
 
 ## Support
 This repository is not suitable for support. Please don't use our issue tracker for support requests. Support can take place through the [WordPress.org forum](https://wordpress.org/support/plugin/come-back/).
