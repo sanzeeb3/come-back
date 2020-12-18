@@ -46,7 +46,7 @@ You can switch to 'Text' format in Tinymce editor in the settings and choose 'im
 = 1.1.0 - 12/10/2020 =
 * Fix - The functionality.
 
-= 1.1.1 = 12/13/2020 =
+= 1.1.1 - 12/13/2020 =
 * Fix - HTML emails.
 * Fix - Respect tinymce spaces and linebreaks.
 
