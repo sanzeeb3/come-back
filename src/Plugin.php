@@ -117,7 +117,7 @@ final class Plugin {
 		$email_subject          = get_option( 'come_back_email_subject', esc_html__( 'Come Back!', 'come-back' ) );
 		$inactivity_period      = get_option( 'come_back_inactivity_period', 90 );
 
-		$message = 'We haven\'t seen you in a while. Things are a lot different since the last time you logged into {site_name}. I\'m {name}, CEO of {site_name}. I wanted to send you a note since you have been inactive for a while. You can come back and continue your awesome works at {site_name}.<br/><br/>Please come back!';
+		$message       = 'Howdy {user_first_name}, <br/><br/>We haven\'t seen you in a while. Things are a lot different since the last time you logged into {site_name}. I\'m {name}, CEO of {site_name}. I wanted to send you a note since you have been inactive for a while. You can come back and continue your awesome works at {site_name}.<br/><br/>Please come back!';
 
 		$users = get_users();   // @TODO:: Improve query based on results.
 
