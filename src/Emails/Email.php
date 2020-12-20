@@ -62,7 +62,7 @@ class Email {
 
 		include( 'templates/header.php' );
 
-		echo $message;
+		printf( $message );
 
 		include( 'templates/footer.php' );
 
