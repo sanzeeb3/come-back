@@ -1,6 +1,6 @@
 <?php
 
-namespace ComeBack;
+namespace ComeBack\Emails;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -10,6 +10,23 @@ defined( 'ABSPATH' ) || exit;
  * @since 1.3.0
  */
 class Email {
+
+	/**
+	 * Emails to be sent to.
+	 *
+	 * @since 1.3.0
+	 * @var string.
+	 */
+	private $to;
+
+	/**
+	 * Emails to be sent from.
+	 *
+	 * @since 1.3.0
+	 * @var string.
+	 */
+	private $from;
+
 
 	/**
 	 * ComeBack Email Contructor.
@@ -33,6 +50,13 @@ class Email {
 	public function send() {
 
 		do_action( 'come_back_before_email_sent', $this );
+
+		ob_start();
+
+		include( 'templates/header.php' );
+		include( 'templates/footer.php' );
+		$message = ob_get_contents();
+		ob_end_clean();
 
 		wp_mail( $to, $subject, $message, $header, $attachments );
 
