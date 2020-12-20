@@ -54,23 +54,17 @@ class Email {
 	 */
 	public function send( $user ) {
 
-		$message = apply_filters( 'come_back_process_smart_tags', $this->message, $user );
+		$message = apply_filters( 'come_back_process_smart_tags', nl2br( $this->message ), $user );
 
 		do_action( 'come_back_before_email_sent', $this );
-
+		
 		ob_start();
+		
+		include( 'templates/template.php' );
 
-		include( 'templates/header.php' );
+		$email = ob_get_clean();
 
-		printf( $message );
-
-		include( 'templates/footer.php' );
-
-		$message = ob_get_contents();
-
-		ob_end_clean();
-
-		wp_mail( $user->user_email, $this->subject, nl2br( $message ), $this->header );
+		wp_mail( $user->user_email, $this->subject, $email, $this->header );
 
 		do_action( 'come_back_after_email_sent', $this );
 
