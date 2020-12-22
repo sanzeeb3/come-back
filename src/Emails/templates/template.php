@@ -23,7 +23,7 @@
                      <table class="content" align="center" cellpadding="0" cellspacing="0" border="0">
                         <tr>
                             <td style="text-align: center">
-                               <?php echo sprintf(__( 'Sent from %s', 'come-back'), get_bloginfo() ); ?>
+                               <?php echo sprintf(__( 'Sent from <a href="%1s">%2s</a>', 'come-back'), get_bloginfo('url'), get_bloginfo()  ); ?>
                             </td>
                         </tr>
                     </table>
