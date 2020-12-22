@@ -119,11 +119,11 @@ class Email {
 	 */
 	public function come_back_locate_template( $template_name, $template_path = '', $default_path = '' ) {
 		if ( ! $template_path ) {
-			$template_path = COME_BACK . '/src/Emails/templates/';
+			$template_path = plugins_url( 'src/Emails/templates/', COME_BACK );
 		}
 
 		if ( ! $default_path ) {
-			$default_path = COME_BACK . '/src/Emails/templates/';
+			$default_path = plugins_url( 'src/Emails/templates/', COME_BACK );
 		}
 
 		// Look within passed path within the theme - this is priority.
