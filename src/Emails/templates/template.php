@@ -2,7 +2,7 @@
 /**
  * The Email template.
  *
- * This template can be overridden by copying it to yourtheme/come-back/template.php.
+ * This template can be overridden by copying it to your-child-theme/come-back/template.php.
  *
  * HOWEVER, on occasion Come Back! will need to update template files and you
  * (the theme developer) will need to copy the new files to your theme to
