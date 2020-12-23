@@ -62,7 +62,7 @@ class Email {
 
 		// Allow themes to override the template.
 		$template = locate_template(
-				'come-back/template.php'
+			'come-back/template.php'
 		);
 
 		if ( ! $template ) {	// Themes's template should be given the priority.

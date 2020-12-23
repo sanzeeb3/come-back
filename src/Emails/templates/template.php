@@ -17,6 +17,9 @@
 
 defined( 'ABSPATH' ) || exit;
 
+$backgound_color = get_option( 'come_back_email_background_color', '#f6f8f1' );
+$footer_text = get_option( 'come_back_email_footer_text',  sprintf( __( 'Sent from <a href="%1s">%2s</a>', 'come-back'), get_bloginfo('url'), get_bloginfo() ) );
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -29,13 +32,14 @@ defined( 'ABSPATH' ) || exit;
         </style>
     </head>
     <body>
-        <table width="100%" bgcolor="#f6f8f1" border="0" cellpadding="0" cellspacing="0">
+        <table width="100%" bgcolor="<?php echo $background_color;?>" border="0" cellpadding="0" cellspacing="0">
             <tr>
                 <td>
                     <table class="content" cellpadding="0" cellspacing="0" border="0">
                         <tr>
                             <td style="padding: 20px">
-                               <?php echo $message;     // The message body that is inserted in the Settings > Come Back! > Email Message.
+                               <?php echo $message; // The message body that is inserted in the Settings > Come Back! > Email Message. 
+                                   // TODO:: Escape HTML tags in output based on what is accepted.
                                ?>
                             </td>
                         </tr>
@@ -44,7 +48,7 @@ defined( 'ABSPATH' ) || exit;
                      <table class="content" align="center" cellpadding="0" cellspacing="0" border="0">
                         <tr>
                             <td style="text-align: center">
-                               <?php echo sprintf(__( 'Sent from <a href="%1s">%2s</a>', 'come-back'), get_bloginfo('url'), get_bloginfo()  ); ?>
+                               <?php echo $footer_text; ?>
                             </td>
                         </tr>
                     </table>
