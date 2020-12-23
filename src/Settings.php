@@ -103,13 +103,14 @@ class Settings {
 								);
 								?>
 
-
 								<?php
-								wp_editor( $email_message, $editor_id, $args );
+									wp_editor( $email_message, $editor_id, $args );
 								?>
-						<br/>	
-						<b><?php echo __( 'Pro Tip:', 'come-back' ); ?></b>
-						<em> <?php echo sprintf( __( 'There are helpful %1s that you can use on the email subject and email message.', 'come-back' ), '<a href="http://sanjeebaryal.com.np/bring-your-lost-customers-back/" target="_blank"><strong>Smart Tags</strong></a>' ); ?> </em>
+						<br/>
+						<b><u><?php echo __( 'Pro Tips:', 'come-back' ); ?></b></u><br/><br/>
+						<li> <?php echo sprintf( __( 'There are helpful %1s that you can use on the email subject and email message.', 'come-back' ), '<a href="http://sanjeebaryal.com.np/bring-your-lost-customers-back/" target="_blank"><strong>Smart Tags</strong></a>' ); ?> </li>
+						<li> <?php echo sprintf( __( 'The email template can be customized and styled by your own. Here is the %1s to customize the email template.', 'come-back' ), '<a href="http://sanjeebaryal.com.np/come-back-template-structure/" target="_blank"><strong>documentation</strong></a>' ); ?> </li>
+						<li> <?php echo sprintf( __( 'If you\'re facing issues with email delivery, I recommend setting up SMTP using plugins such as %1s. .', 'come-back' ), '<a href="https://wordpress.org/plugins/wp-mail-smtp/" target="_blank"><strong>WP Mail SMTP</strong></a>' ); ?> </li>
 					</td>
 						<style>
 							#wp-come-back-email-editor-wrap {
