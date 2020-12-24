@@ -161,7 +161,7 @@ final class Plugin {
 		$content = str_replace( '{lost_password_url}', wp_lostpassword_url(), $content );
 		$content = str_replace( '{home_url}', home_url(), $content );
 		$content = str_replace( '{admin_email}', get_option( 'admin_email' ), $content );
-		$content = str_replace( '{date}', wp_date(), $content );
+		$content = str_replace( '{date}', current_time( 'mysql' ), $content );
 
 		return $content;
 	}
