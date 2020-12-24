@@ -38,6 +38,10 @@ To verify the emails are actually sent, go to the Settings > Come Back! and ente
 
 You can switch to 'Text' format in Tinymce editor in the settings and choose 'img' button. You'll need to enter the URL of the image and description of the image. That's it.
 
+= Can I customize the email template?
+
+Yes. You can follow the [documentation](http://sanjeebaryal.com.np/come-back-template-structure/).
+
 == Changelog ==
 
 = 1.0.0 - 12/09/2020 =
