@@ -78,10 +78,13 @@ class Settings {
 			true
 		);
 
-		wp_localize_script( 'come-back', 'come_back_params', array(
-				'ajax_url'           => admin_url( 'admin-ajax.php' ),
-				'cb_nonce' 			 => wp_create_nonce( 'cb-send-test-email' ),
-				'sending'       	 => __( 'Sending...', 'come-back' ),
+		wp_localize_script(
+			'come-back',
+			'come_back_params',
+			array(
+				'ajax_url' => admin_url( 'admin-ajax.php' ),
+				'cb_nonce' => wp_create_nonce( 'cb-send-test-email' ),
+				'sending'  => __( 'Sending...', 'come-back' ),
 			)
 		);
 	}
@@ -162,8 +165,8 @@ class Settings {
 				<tr valign="top" class="come-back-test-email">
 					<th scope="row"><?php echo esc_html__( 'SendTest Email:', 'come-back' ); ?></th>
 						<td>
-							<input style="width:auto" type="email" name="come_back_test_email" value="<?php echo get_option( 'admin_email'); ?>" />
-							<input type="button" class="button button-primary come-back-send-test-email" value="<?php echo esc_html__( 'Send', 'come-back' );?>">
+							<input style="width:auto" type="email" name="come_back_test_email" value="<?php echo get_option( 'admin_email' ); ?>" />
+							<input type="button" class="button button-primary come-back-send-test-email" value="<?php echo esc_html__( 'Send', 'come-back' ); ?>">
 						</td>
 				</tr>
 			</table>
@@ -231,7 +234,7 @@ class Settings {
 
 	/**
 	 * Send a test email.
-	 * 
+	 *
 	 * @since  1.3.1
 	 */
 	public function send_test_email() {
@@ -241,27 +244,35 @@ class Settings {
 
 		if ( ! is_email( $email ) ) {
 
-			wp_send_json( array(
-				esc_html__( 'Invalid email address provided.', 'come-back' ), 
-				'NOT OK'
-			) );
+			wp_send_json(
+				array(
+					'message' => esc_html__( 'Invalid email address provided.', 'come-back' ),
+					'status'  => 'NOT OK',
+				)
+			);
 		}
 
 		$email_obj = new Email();
-		$sent      = $email_obj->send( $email );
+		$sent      = $email_obj->send( $email, wp_get_current_user() );
 
 		if ( $sent ) {
-				
-			wp_send_json( array(
-				esc_html__( 'Email sent. Please check your inbox to confirm it\'s delivery.', 'come-back' ), 
-					'OK'
-			) );
-		}
 
-		wp_send_json( array(
-			esc_html__( 'Something went wrong, email not sent. Please check if your site can send emails.', 'come-back' ), 
-			'NOT OK'
-		) );
+			wp_send_json(
+				array(
+					'message' => esc_html__( 'Email sent. Please check your inbox to confirm it\'s delivery.', 'come-back' ),
+					'status'  => 'OK',
+				)
+			);
+		} else {
+
+			wp_send_json(
+				array(
+					'message' => esc_html__( 'Something went wrong, email not sent. Please check if your site can send emails.', 'come-back' ),
+					'status'  => 'NOT OK',
+				)
+			);
+
+		}
 	}
 
 	/**

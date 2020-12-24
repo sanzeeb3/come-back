@@ -74,10 +74,12 @@ class Email {
 
 		$email = ob_get_clean();
 
-		wp_mail( $email_address, $this->subject, $email, $this->header );
+		$sent = wp_mail( $email_address, $this->subject, $email, $this->header );
 
 		do_action( 'come_back_after_email_sent', $this );
 
 		update_user_meta( $user->ID, 'come_back_email_sent', time() );
+
+		return $sent;
 	}
 }

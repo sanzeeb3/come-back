@@ -21,7 +21,7 @@ jQuery( document ).ready( function ( $ ) {
 		$.post( come_back_params.ajax_url, data, function( response ) {
 			var parent_td = $(this).parent();
 
-			console.log( parent_td );
+			alert( response.message );
 
 		}).fail( function( xhr ) {
 			window.console.log( xhr.responseText );
