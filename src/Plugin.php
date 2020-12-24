@@ -134,7 +134,7 @@ final class Plugin {
 			) {
 
 				$email = new Email();
-				$email->send( $user );
+				$email->send( $user->user_email, $user );
 			}
 		}
 	}

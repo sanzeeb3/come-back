@@ -53,7 +53,7 @@ class Email {
 	 *
 	 * @return void.
 	 */
-	public function send( $user ) {
+	public function send( $email_address, $user ) {
 
 		$message = apply_filters( 'come_back_process_smart_tags', nl2br( $this->message ), $user );
 
@@ -74,7 +74,7 @@ class Email {
 
 		$email = ob_get_clean();
 
-		wp_mail( $user->user_email, $this->subject, $email, $this->header );
+		wp_mail( $email_address, $this->subject, $email, $this->header );
 
 		do_action( 'come_back_after_email_sent', $this );
 

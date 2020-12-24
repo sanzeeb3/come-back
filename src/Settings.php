@@ -2,6 +2,8 @@
 
 namespace ComeBack;
 
+use ComeBack\Emails\Email;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -161,7 +163,7 @@ class Settings {
 					<th scope="row"><?php echo esc_html__( 'SendTest Email:', 'come-back' ); ?></th>
 						<td>
 							<input style="width:auto" type="email" name="come_back_test_email" value="<?php echo get_option( 'admin_email'); ?>" />
-							<input type="button" class="button button-primary come-back-test-email" value="<?php echo esc_html__( 'Send', 'come-back' );?>">
+							<input type="button" class="button button-primary come-back-send-test-email" value="<?php echo esc_html__( 'Send', 'come-back' );?>">
 						</td>
 				</tr>
 			</table>
@@ -237,12 +239,29 @@ class Settings {
 
 		$email = sanitize_email( $_POST['email'] );
 
-		if ( is_email( $email ) ) {
+		if ( ! is_email( $email ) ) {
 
-			wp_send_json( esc_html__( 'Invalid email address provided.', 'come-back' )  );			
+			wp_send_json( array(
+				esc_html__( 'Invalid email address provided.', 'come-back' ), 
+				'NOT OK'
+			) );
 		}
 
-		wp_send_json( 'OK' );
+		$email_obj = new Email();
+		$sent      = $email_obj->send( $email );
+
+		if ( $sent ) {
+				
+			wp_send_json( array(
+				esc_html__( 'Email sent. Please check your inbox to confirm it\'s delivery.', 'come-back' ), 
+					'OK'
+			) );
+		}
+
+		wp_send_json( array(
+			esc_html__( 'Something went wrong, email not sent. Please check if your site can send emails.', 'come-back' ), 
+			'NOT OK'
+		) );
 	}
 
 	/**

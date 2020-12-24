@@ -3,9 +3,9 @@
 'use strict';
 
 jQuery( document ).ready( function ( $ ) {
-	$('body').on('click', '.come-back-test-email', function(e) {
+	$( '.come-back-send-test-email' ).on( 'click', function(e) {
 		e.preventDefault();
-		console.log('hi');
+
 	 	var value = $(this).val();
 
 		$(this).val( come_back_params.sending );
@@ -19,7 +19,7 @@ jQuery( document ).ready( function ( $ ) {
 		};
 
 		$.post( come_back_params.ajax_url, data, function( response ) {
-			var parent_td = $(this).parent('td');
+			var parent_td = $(this).parent();
 
 			console.log( parent_td );
 
