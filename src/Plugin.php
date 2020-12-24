@@ -156,6 +156,12 @@ final class Plugin {
 		$content = str_replace( '{site_name}', get_bloginfo(), $content );
 		$content = str_replace( '{user_first_name}', get_user_meta( $user->ID, 'fist_name', true ), $content );
 		$content = str_replace( '{user_last_name}', get_user_meta( $user->ID, 'last_name', true ), $content );
+		$content = str_replace( '{user_email}', $user->user_email, $content );
+		$content = str_replace( '{login_url}', wp_login_url(), $content );
+		$content = str_replace( '{lost_password_url}', wp_lostpassword_url(), $content );
+		$content = str_replace( '{home_url}', home_url(), $content );
+		$content = str_replace( '{admin_email}', get_option( 'admin_email' ), $content );
+		$content = str_replace( '{date}', wp_date(), $content );
 
 		return $content;
 	}
