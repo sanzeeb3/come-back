@@ -12,7 +12,9 @@
  *
  * @see https://sanjeebaryal.com.np/come-back-template-structure
  *
- * @version 1.3.0
+ * @since 1.3.0
+ * 
+ * @version 1.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
