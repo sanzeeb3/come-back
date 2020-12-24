@@ -124,7 +124,7 @@ class Settings {
 					<th scope="row"><?php echo esc_html__( 'Background Color:', 'come-back' ); ?></th>
 						<td>
 							<input style="width:auto" type="text" name="come_back_email_background_color" value="<?php echo $background_color; ?>" />
-							<span class="colorpickpreview" height="30px" width="30px" style="border: 1px solid #ddd; display: inline-block; background: <?php echo $background_color; ?>"></span>
+							<span class="colorpickpreview" style="border: 1px solid #ddd; height: 30px; width:30px; display: inline-block; background: <?php echo $background_color; ?>"></span>
 						</td>
 				</tr>
 			</table>
