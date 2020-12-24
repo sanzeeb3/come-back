@@ -124,7 +124,7 @@ class Settings {
 					<th scope="row"><?php echo esc_html__( 'Background Color:', 'come-back' ); ?></th>
 						<td>
 							<input style="width:auto" type="text" name="come_back_email_background_color" value="<?php echo $background_color; ?>" />
-							<span class="colorpickpreview" height="30px" width="30px" style="border: 1px solid #ddd; display: inlune-block; background: <?php echo $background_color;?>"></span>
+							<span class="colorpickpreview" height="30px" width="30px" style="border: 1px solid #ddd; display: inline-block; background: <?php echo $background_color; ?>"></span>
 						</td>
 				</tr>
 			</table>
@@ -174,14 +174,14 @@ class Settings {
 					'b'      => array(),
 					'br'     => array(),
 					'p'      => array(),
-					'pre' 	 => array(),
+					'pre'    => array(),
 					'ul'     => array(),
 					'li'     => array(),
 					'em'     => array(),
 					'strong' => array(),
 					'img'    => array(
 						'src' => array(),
-						'alt' => array()
+						'alt' => array(),
 					),
 				)
 			);

@@ -26,6 +26,7 @@ class Email {
 
 	/**
 	 * Email Message
+	 *
 	 * @var string.
 	 */
 	private $message;
@@ -38,8 +39,8 @@ class Email {
 		$this->header  = array( 'Content-Type: text/html; charset=UTF-8' );
 		$this->subject = get_option( 'come_back_email_subject', esc_html__( 'Come Back!', 'come-back' ) );
 
-		$message       = 'Howdy {user_first_name}, <br/><br/>We haven\'t seen you in a while. Things are a lot different since the last time you logged into {site_name}. I\'m {name}, CEO of {site_name}. I wanted to send you a note since you have been inactive for a while. You can come back and continue your awesome works at {site_name}.<br/><br/>Please come back!';
-		
+		$message = 'Howdy {user_first_name}, <br/><br/>We haven\'t seen you in a while. Things are a lot different since the last time you logged into {site_name}. I\'m {name}, CEO of {site_name}. I wanted to send you a note since you have been inactive for a while. You can come back and continue your awesome works at {site_name}.<br/><br/>Please come back!';
+
 		$this->message = get_option( 'come-back-email-editor', $message );
 	}
 
@@ -57,7 +58,7 @@ class Email {
 		$message = apply_filters( 'come_back_process_smart_tags', nl2br( $this->message ), $user );
 
 		do_action( 'come_back_before_email_sent', $this );
-		
+
 		ob_start();
 
 		// Allow themes to override the template.
@@ -65,7 +66,7 @@ class Email {
 			'come-back/template.php'
 		);
 
-		if ( ! $template ) {	// Themes's template should be given the priority.
+		if ( ! $template ) {    // Themes's template should be given the priority.
 			$template = 'templates/template.php';
 		}
 

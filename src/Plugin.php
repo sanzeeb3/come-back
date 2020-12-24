@@ -128,14 +128,14 @@ final class Plugin {
 			// Last login time is less than the current time minus the inactivity days to send emails.
 			// Come Back email is already sent. Send it again after 30 days, if the user do not log in again after the email is sent.
 			// If there is no last_login, send email based on plugin activation date. For inactive users before Come Back Installation.
-			// if ( ! empty( $last_login ) && $last_login < ( strtotime( '-' . $inactivity_period . 'day' ) )
-			// 	|| ( ! empty( $come_back_email_sent ) && $come_back_email_sent < ( strtotime( '- 30 day' ) ) ) && ( ! empty( $last_login ) && $last_login < ( strtotime( '- 30 day' ) ) )
-			// 	|| empty( $last_login ) && $plugin_activation_date < ( strtotime( '-' . $inactivity_period . 'day' ) )
-			// ) {
+			if ( ! empty( $last_login ) && $last_login < ( strtotime( '-' . $inactivity_period . 'day' ) )
+				|| ( ! empty( $come_back_email_sent ) && $come_back_email_sent < ( strtotime( '- 30 day' ) ) ) && ( ! empty( $last_login ) && $last_login < ( strtotime( '- 30 day' ) ) )
+				|| empty( $last_login ) && $plugin_activation_date < ( strtotime( '-' . $inactivity_period . 'day' ) )
+			) {
 
 				$email = new Email();
 				$email->send( $user );
-			// }
+			}
 		}
 	}
 
