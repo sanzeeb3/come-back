@@ -20,8 +20,10 @@ class Settings {
 
 		add_action( 'admin_menu', array( $this, 'add_settings_page' ) );
 		add_action( 'admin_init', array( $this, 'save_settings' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_assets' ) );
 		add_filter( 'admin_footer_text', array( $this, 'get_admin_footer' ), 1, 2 );
 		add_action( 'admin_print_scripts', array( $this, 'remove_notices' ) );
+		add_action( 'wp_ajax_come_back_send_test_email', array( $this, 'send_test_email' ) );
 	}
 
 	/**
@@ -52,6 +54,33 @@ class Settings {
 			'manage_options',
 			'come-back',
 			array( $this, 'display' )
+		);
+	}
+
+	/**
+	 * Enqueue all assets.
+	 *
+	 * @since 1.3.1
+	 */
+	public function enqueue_assets() {
+
+		if ( ! $this->is_admin_screen() ) {
+			return;
+		}
+
+		wp_enqueue_script(
+			'come-back',
+			plugins_url( 'assets/script.js', COME_BACK ),
+			array( 'jquery' ),
+			COME_BACK_VERSION,
+			true
+		);
+
+		wp_localize_script( 'come-back', 'come_back_params', array(
+				'ajax_url'           => admin_url( 'admin-ajax.php' ),
+				'cb_nonce' 			 => wp_create_nonce( 'cb-send-test-email' ),
+				'sending'       	 => __( 'Sending...', 'come-back' ),
+			)
 		);
 	}
 
@@ -127,6 +156,14 @@ class Settings {
 							<span class="colorpickpreview" style="border: 1px solid #ddd; height: 30px; width:30px; display: inline-block; background: <?php echo $background_color; ?>"></span>
 						</td>
 				</tr>
+
+				<tr valign="top" class="come-back-test-email">
+					<th scope="row"><?php echo esc_html__( 'SendTest Email:', 'come-back' ); ?></th>
+						<td>
+							<input style="width:auto" type="email" name="come_back_test_email" value="<?php echo get_option( 'admin_email'); ?>" />
+							<input type="button" class="button button-primary come-back-test-email" value="<?php echo esc_html__( 'Send', 'come-back' );?>">
+						</td>
+				</tr>
 			</table>
 			<?php wp_nonce_field( 'come_back_settings', 'come_back_settings_nonce' ); ?>
 			<?php submit_button(); ?>
@@ -188,6 +225,24 @@ class Settings {
 
 			update_option( 'come-back-email-editor', $editor );
 		}
+	}
+
+	/**
+	 * Send a test email.
+	 * 
+	 * @since  1.3.1
+	 */
+	public function send_test_email() {
+		check_ajax_referer( 'cb-send-test-email', 'security' );
+
+		$email = sanitize_email( $_POST['email'] );
+
+		if ( is_email( $email ) ) {
+
+			wp_send_json( esc_html__( 'Invalid email address provided.', 'come-back' )  );			
+		}
+
+		wp_send_json( 'OK' );
 	}
 
 	/**
