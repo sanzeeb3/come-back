@@ -69,6 +69,7 @@ class Settings {
 
 		$inactivity_period = get_option( 'come_back_inactivity_period', 90 );
 		$email_subject     = get_option( 'come_back_email_subject', esc_html__( 'Come Back!', 'come-back' ) );
+		$background_color  = get_option( 'come_back_email_background_color', '#f7f7f7' );
 
 		$message       = 'Howdy {user_first_name}, <br/><br/>We haven\'t seen you in a while. Things are a lot different since the last time you logged into {site_name}. I\'m {name}, CEO of {site_name}. I wanted to send you a note since you have been inactive for a while. You can come back and continue your awesome works at {site_name}.<br/><br/>Please come back!';
 		$email_message = get_option( 'come-back-email-editor', $message );
@@ -118,6 +119,14 @@ class Settings {
 							}
 						</style>
 				</tr>
+
+				<tr valign="top" class="come-back-background-color">
+					<th scope="row"><?php echo esc_html__( 'Background Color:', 'come-back' ); ?></th>
+						<td>
+							<input style="width:auto" type="text" name="come_back_email_background_color" value="<?php echo $background_color; ?>" />
+							<span class="colorpickpreview" height="30px" width="30px" style="border: 1px solid #ddd; display: inlune-block; background: <?php echo $background_color;?>"></span>
+						</td>
+				</tr>
 			</table>
 			<?php wp_nonce_field( 'come_back_settings', 'come_back_settings_nonce' ); ?>
 			<?php submit_button(); ?>
@@ -143,7 +152,7 @@ class Settings {
 			return;
 		}
 
-		$options = array( 'come_back_inactivity_period', 'come_back_email_subject' );
+		$options = array( 'come_back_inactivity_period', 'come_back_email_subject', 'come_back_email_background_color' );
 
 		foreach ( $options as $option ) {
 			if ( isset( $_POST[ $option ] ) ) {

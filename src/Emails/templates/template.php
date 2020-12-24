@@ -17,7 +17,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-$backgound_color = get_option( 'come_back_email_background_color', '#f6f8f1' );
+$backgound_color = get_option( 'come_back_email_background_color', '#f7f7f7' );
 $footer_text = get_option( 'come_back_email_footer_text',  sprintf( __( 'Sent from <a href="%1s">%2s</a>', 'come-back'), get_bloginfo('url'), get_bloginfo() ) );
 
 ?>
@@ -32,7 +32,7 @@ $footer_text = get_option( 'come_back_email_footer_text',  sprintf( __( 'Sent fr
         </style>
     </head>
     <body>
-        <table width="100%" bgcolor="<?php echo $background_color;?>" border="0" cellpadding="0" cellspacing="0">
+        <table width="100%" bgcolor="<?php echo $backgound_color;?>" border="0" cellpadding="0" cellspacing="0">
             <tr>
                 <td>
                     <table class="content" cellpadding="0" cellspacing="0" border="0">
