@@ -18,7 +18,7 @@
 defined( 'ABSPATH' ) || exit;
 
 $backgound_color = get_option( 'come_back_email_background_color', '#f7f7f7' );
-$footer_text     = get_option( 'come_back_email_footer_text', sprintf( __( 'Sent from <a href="%1$1s">%2$2s</a>', 'come-back' ), get_bloginfo( 'url' ), get_bloginfo() ) );
+$footer_text     = apply_filters( 'come_back_email_footer_text', sprintf( __( 'Sent from <a href="%1$1s">%2$2s</a>', 'come-back' ), get_bloginfo( 'url' ), get_bloginfo() ) );
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
