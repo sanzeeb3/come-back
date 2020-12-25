@@ -163,7 +163,7 @@ class Settings {
 				</tr>
 
 				<tr valign="top" class="come-back-test-email">
-					<th scope="row"><?php echo esc_html__( 'SendTest Email:', 'come-back' ); ?></th>
+					<th scope="row"><?php echo esc_html__( 'Send Sample Email:', 'come-back' ); ?></th>
 						<td>
 							<input style="width:auto" type="email" name="come_back_test_email" value="<?php echo get_option( 'admin_email' ); ?>" />
 							<input type="button" class="button button-primary come-back-send-test-email" value="<?php echo esc_html__( 'Send', 'come-back' ); ?>">
@@ -246,7 +246,7 @@ class Settings {
 
 			wp_send_json(
 				array(
-					'message' => esc_html__( 'Invalid email address provided.', 'come-back' ),
+					'message' => esc_html__( 'Email not sent. Invalid email address.', 'come-back' ),
 					'status'  => 'NOT OK',
 				)
 			);
@@ -267,7 +267,7 @@ class Settings {
 
 			wp_send_json(
 				array(
-					'message' => esc_html__( 'Something went wrong, email not sent. Please check if your site can send emails.', 'come-back' ),
+					'message' => esc_html__( 'Email not sent. Please check if your site can send emails.', 'come-back' ),
 					'status'  => 'NOT OK',
 				)
 			);

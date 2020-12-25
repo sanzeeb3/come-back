@@ -19,9 +19,19 @@ jQuery( document ).ready( function ( $ ) {
 		};
 
 		$.post( come_back_params.ajax_url, data, function( response ) {
-			var parent_td = $(this).parent();
 
-			alert( response.message );
+			if ( response.status === 'OK') {
+				var status = 'success';
+			} else {
+				var status = 'error';
+			}
+
+			var closest = $( '.come-back-send-test-email' ).closest( 'tr' );
+			var clone = '<tr valign="top"><th></th><td><div class="cb-cloned-td notice notice-'+ status +'"><p><strong>'+ response.message +'</strong></p></div></td>>/tr>';
+
+			closest.after( clone );
+
+			$( '.come-back-send-test-email' ).val(value);
 
 		}).fail( function( xhr ) {
 			window.console.log( xhr.responseText );
