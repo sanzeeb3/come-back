@@ -66,11 +66,12 @@ class Email {
 			'come-back/template.php'
 		);
 
-		if ( ! $template ) {    // Themes's template should be given the priority.
+	    // Themes's template should be given the priority.
+		if ( ! file_exists( $template ) ) {
 			$template = 'templates/template.php';
 		}
 
-		include $template;
+		include_once $template;
 
 		$email = ob_get_clean();
 
