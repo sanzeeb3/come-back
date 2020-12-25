@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Come Back! package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Come Back! 1.3.0\n"
+"Project-Id-Version: Come Back! 1.3.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-24 15:27:53+00:00\n"
+"POT-Creation-Date: 2020-12-25 07:44:38+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,49 +21,73 @@ msgstr ""
 msgid "Sent from <a href=\"%1$1s\">%2$2s</a>"
 msgstr ""
 
-#: src/Settings.php:78
-msgid "General Settings"
-msgstr ""
-
-#: src/Settings.php:83
-msgid "Send email to user after inactive days:"
-msgstr ""
-
-#: src/Settings.php:90
-msgid "Email Subject:"
-msgstr ""
-
-#: src/Settings.php:97
-msgid "Email Message:"
-msgstr ""
-
-#: src/Settings.php:111
-msgid "Pro Tips:"
+#: src/Settings.php:87
+msgid "Sending..."
 msgstr ""
 
 #: src/Settings.php:112
+msgid "General Settings"
+msgstr ""
+
+#: src/Settings.php:117
+msgid "Send email to user after inactive days:"
+msgstr ""
+
+#: src/Settings.php:124
+msgid "Email Subject:"
+msgstr ""
+
+#: src/Settings.php:131
+msgid "Email Message:"
+msgstr ""
+
+#: src/Settings.php:145
+msgid "Pro Tips:"
+msgstr ""
+
+#: src/Settings.php:146
 msgid ""
 "There are helpful %1s that you can use on the email subject and email "
 "message."
 msgstr ""
 
-#: src/Settings.php:113
+#: src/Settings.php:147
 msgid ""
 "The email template can be customized and styled by your own. Here is the "
 "%1s to customize the email template."
 msgstr ""
 
-#: src/Settings.php:114
+#: src/Settings.php:148
 msgid ""
 "If you're facing issues with email delivery, I recommend setting up SMTP "
 "using plugins such as %1s. ."
 msgstr ""
 
-#: src/Settings.php:124
+#: src/Settings.php:158
 msgid "Background Color:"
 msgstr ""
 
-#: src/Settings.php:212
+#: src/Settings.php:166
+msgid "Send Sample Email:"
+msgstr ""
+
+#: src/Settings.php:169
+msgid "Send"
+msgstr ""
+
+#: src/Settings.php:249
+msgid "Email not sent. Invalid email address."
+msgstr ""
+
+#: src/Settings.php:262
+msgid "Email sent. Please check your inbox to confirm it's delivery."
+msgstr ""
+
+#: src/Settings.php:270
+msgid "Email not sent. Please check if your site can send emails."
+msgstr ""
+
+#: src/Settings.php:297
 #. translators: %1$s - WP.org link; %2$s - same WP.org link.
 msgid ""
 "Please rate <strong>Come Back</strong> <a href=\"%1$s\" target=\"_blank\" "

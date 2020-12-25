@@ -4,7 +4,7 @@ Tags: inactive, idle-users, notification
 Requires at least: 5.0
 Tested up to: 5.6.0
 Requires PHP: 5.6
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -61,3 +61,7 @@ Yes. You can follow the [documentation](http://sanjeebaryal.com.np/come-back-tem
 = 1.3.0 - 12/24/2020 =
 * Add - More shortcuts support.
 * Add - Email template support.
+
+= 1.3.1 - 12/25/2020 =
+* Feature - Send sample email.
+* Fix - Preview background color.
