@@ -71,7 +71,7 @@ class Email {
 			$template = 'templates/template.php';
 		}
 
-		include_once $template;
+		include $template;
 
 		$email = ob_get_clean();
 

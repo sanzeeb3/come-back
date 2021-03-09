@@ -120,6 +120,8 @@ final class Plugin {
 
 		$users = get_users();   // @TODO:: Improve query based on results.
 
+		$email = new Email();
+
 		foreach ( $users as $user ) {
 
 			$last_login           = get_user_meta( $user->ID, 'last_login', true );
@@ -133,7 +135,6 @@ final class Plugin {
 				|| empty( $last_login ) && $plugin_activation_date < ( strtotime( '-' . $inactivity_period . 'day' ) )
 			) {
 
-				$email = new Email();
 				$email->send( $user->user_email, $user );
 			}
 		}
