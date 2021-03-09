@@ -66,5 +66,5 @@ Yes. You can follow the [documentation](http://sanjeebaryal.com.np/come-back-tem
 * Feature - Send sample email.
 * Fix - Preview background color.
 
-= 1.3.2 - 03/09/2020 =
+= 1.3.2 - 03/09/2021 =
 * Fix - include_once does work/run on loop.
