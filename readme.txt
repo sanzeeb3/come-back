@@ -71,3 +71,4 @@ Yes. You can follow the [documentation](http://sanjeebaryal.com.np/come-back-tem
 
 = 1.3.3 - 05/18/2021 =
 * Fix - Come Back! Email is sent everyday once the user hits the inactivity days.
+* Add - uninstall.php to remove Come Back! data upon plugin deletion.
