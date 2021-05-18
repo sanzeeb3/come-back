@@ -129,15 +129,15 @@ final class Plugin {
 
 			// Come Back! email is not sent yet. Send it if the last login is smaller than the inactive period set, or if last login is empty send it if the plugin activate date is smaller than the inactive period.
 			if ( empty( $come_back_email_sent ) ) {
-				if ( ! empty( $last_login ) && $last_login < ( strtotime( '-' . $inactivity_period . 'day' ) ) 
+				if ( ! empty( $last_login ) && $last_login < ( strtotime( '-' . $inactivity_period . 'day' ) )
 					|| empty( $last_login ) && $plugin_activation_date < ( strtotime( '-' . $inactivity_period . 'day' ) ) ) {
-					$email->send( $user->user_email, $user );					
-				}
-			} else
-				// Come Back! email is already sent. Send it again after the inactive period of email sent or if the user does not log in still.
-				if ( $come_back_email_sent < ( strtotime( '-' . $inactivity_period . 'day' ) ) && ( ! empty( $last_login ) && $last_login < ( strtotime( '-' . $inactivity_period . 'day' ) ) ) ) {	
 					$email->send( $user->user_email, $user );
-				} 
+				}
+			} else {
+				// Come Back! email is already sent. Send it again after the inactive period of email sent or if the user does not log in still.
+				if ( $come_back_email_sent < ( strtotime( '-' . $inactivity_period . 'day' ) ) && ( ! empty( $last_login ) && $last_login < ( strtotime( '-' . $inactivity_period . 'day' ) ) ) ) {
+					$email->send( $user->user_email, $user );
+				}
 			}
 		}
 	}
