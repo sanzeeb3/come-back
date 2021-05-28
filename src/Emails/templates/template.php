@@ -41,7 +41,8 @@ $footer_text     = apply_filters( 'come_back_email_footer_text', sprintf( __( 'S
 						<tr>
 							<td style="padding: 20px">
 							   <?php
-								echo $message; // The message body that is inserted in the Settings > Come Back! > Email Message.
+								echo $message;
+								// The message body that is inserted in the Settings > Come Back! > Email Message.
 								   // TODO:: Escape HTML tags in output based on what is accepted.
 								?>
 							</td>
@@ -52,7 +53,8 @@ $footer_text     = apply_filters( 'come_back_email_footer_text', sprintf( __( 'S
 						<tr>
 							<td style="text-align: center">
 							   <?php
-								echo $footer_text; // TODO:: Escape HTML tags in output based on what is accepted.
+								echo $footer_text;
+								// TODO:: Escape HTML tags in output based on what is accepted.
 								?>
 								  
 							</td>

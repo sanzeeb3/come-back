@@ -4,7 +4,8 @@ namespace ComeBack;
 
 use ComeBack\Emails\Email;
 
-defined( 'ABSPATH' ) || exit;   // Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+// Exit if accessed directly.
 
 /**
  * Plugin Class.
@@ -118,7 +119,8 @@ final class Plugin {
 		$plugin_activation_date = get_option( 'come_back_activation_date' );
 		$inactivity_period      = get_option( 'come_back_inactivity_period', 90 );
 
-		$users = get_users();   // @TODO:: Improve query based on results.
+		$users = get_users();
+		// @TODO:: Improve query based on results.
 
 		$email = new Email();
 

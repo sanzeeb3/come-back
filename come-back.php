@@ -15,7 +15,8 @@
  * @license    GPL-3.0+
  */
 
-defined( 'ABSPATH' ) || exit;	// Exit if accessed directly.
+defined( 'ABSPATH' ) || exit;
+// Exit if accessed directly.
 
 define( 'COME_BACK', __FILE__ );
 
@@ -27,7 +28,7 @@ define( 'COME_BACK', __FILE__ );
 const COME_BACK_VERSION = '1.3.3';
 
 require_once 'vendor/autoload.php';
-require_once( 'wp-content/plugins/action-scheduler/action-scheduler.php' );
+require_once 'wp-content/plugins/action-scheduler/action-scheduler.php';
 
 /**
  * Return the main instance of Plugin Class.
@@ -46,7 +47,7 @@ come_back();
  * Add current time on plugin activation.
  *
  * @since  1.0.0
- * 
+ *
  * @return void.
  */
 function come_back_activate() {

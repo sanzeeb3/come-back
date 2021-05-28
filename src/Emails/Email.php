@@ -66,7 +66,7 @@ class Email {
 			'come-back/template.php'
 		);
 
-	    // Themes's template should be given the priority.
+		// Themes's template should be given the priority.
 		if ( ! file_exists( $template ) ) {
 			$template = 'templates/template.php';
 		}

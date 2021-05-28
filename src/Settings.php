@@ -229,7 +229,7 @@ class Settings {
 			);
 
 			update_option( 'come-back-email-editor', $editor );
-		}
+		}//end if
 	}
 
 	/**
