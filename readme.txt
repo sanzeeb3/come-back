@@ -16,6 +16,8 @@ Come Back! sends an automatic email notification to inactive customers to bring 
 
 Create special re-engagement emails targeted directly at your “inactive” customers. Customer inactivity is a fact of life. How you handle it makes all the difference.
 
+Find out the more on [setup documentation](https://sanjeebaryal.com.np/bring-your-lost-customers-back/).
+
 **Sample Email:**
 
 *We haven't seen you in a while. Things are a lot different since the last time you logged into {site_name}. I'm {name}, CEO of {site_name}. I wanted to send you a note since you have been inactive for a while. You can come back and continue your awesome works at {site_name}.*
