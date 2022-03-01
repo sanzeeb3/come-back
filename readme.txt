@@ -4,7 +4,7 @@ Tags: inactive, idle-users, notification
 Requires at least: 5.0
 Tested up to: 5.7
 Requires PHP: 5.6
-Stable tag: 1.3.3
+Stable tag: 1.3.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -74,3 +74,6 @@ Yes. You can follow the [documentation](http://sanjeebaryal.com.np/come-back-tem
 = 1.3.3 - 05/18/2021 =
 * Fix - Come Back! Email is sent everyday once the user hits the inactivity days.
 * Add - uninstall.php to remove Come Back! data upon plugin deletion.
+
+= 1.3.4 - 03/01/2022 =
+* Fix - First Name smart tag

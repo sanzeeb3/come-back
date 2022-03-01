@@ -159,7 +159,7 @@ final class Plugin {
 	public function process_smart_tags( $content, $user ) {
 
 		$content = str_replace( '{site_name}', get_bloginfo(), $content );
-		$content = str_replace( '{user_first_name}', get_user_meta( $user->ID, 'fist_name', true ), $content );
+		$content = str_replace( '{user_first_name}', get_user_meta( $user->ID, 'first_name', true ), $content );
 		$content = str_replace( '{user_last_name}', get_user_meta( $user->ID, 'last_name', true ), $content );
 		$content = str_replace( '{user_email}', $user->user_email, $content );
 		$content = str_replace( '{login_url}', wp_login_url(), $content );
