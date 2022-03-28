@@ -32,10 +32,6 @@ Find out the more on [setup documentation](https://sanjeebaryal.com.np/bring-you
 
 == Frequently Asked Questions ==
 
-= How can I test the plugin?
-
-To verify the emails are actually sent, go to the Settings > Come Back! and enter 0 in the 'Send emails to user after inactive days' and then go to wp-admin/tools.php?page=action-scheduler, search for pending action 'cb_schedule_notification' and run. This will sent the email to all the users.
-
 = How can I add image in the email message?
 
 You can switch to 'Text' format in Tinymce editor in the settings and choose 'img' button. You'll need to enter the URL of the image and description of the image. That's it.
@@ -45,6 +41,13 @@ You can switch to 'Text' format in Tinymce editor in the settings and choose 'im
 Yes. You can follow the [documentation](http://sanjeebaryal.com.np/come-back-template-structure/).
 
 == Changelog ==
+
+= 1.3.4 - 03/01/2022 =
+* Fix - First Name smart tag.
+
+= 1.3.3 - 05/18/2021 =
+* Fix - Come Back! Email is sent everyday once the user hits the inactivity days.
+* Add - uninstall.php to remove Come Back! data upon plugin deletion.
 
 = 1.0.0 - 12/09/2020 =
 * Initial Release
@@ -70,10 +73,3 @@ Yes. You can follow the [documentation](http://sanjeebaryal.com.np/come-back-tem
 
 = 1.3.2 - 03/09/2021 =
 * Fix - include_once does work/run on loop.
-
-= 1.3.3 - 05/18/2021 =
-* Fix - Come Back! Email is sent everyday once the user hits the inactivity days.
-* Add - uninstall.php to remove Come Back! data upon plugin deletion.
-
-= 1.3.4 - 03/01/2022 =
-* Fix - First Name smart tag
