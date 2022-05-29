@@ -2,7 +2,7 @@
 Contributors: sanzeeb3
 Tags: inactive, idle-users, notification
 Requires at least: 5.0
-Tested up to: 5.7
+Tested up to: 6.0
 Requires PHP: 5.6
 Stable tag: 1.3.4
 License: GPLv3
