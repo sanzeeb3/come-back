@@ -27,7 +27,7 @@ define( 'COME_BACK', __FILE__ );
  */
 const COME_BACK_VERSION = '1.3.4';
 
-require_once 'vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 require_once 'wp-content/plugins/action-scheduler/action-scheduler.php';
 
 /**
