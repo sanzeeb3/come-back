@@ -1,5 +1,5 @@
 === Come Back! ===
-Contributors: sanzeeb3
+Contributors: sanzeeb3, estalhun
 Tags: inactive, idle-users, notification
 Requires at least: 5.0
 Tested up to: 6.0
