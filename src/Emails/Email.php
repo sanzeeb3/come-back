@@ -55,9 +55,9 @@ class Email {
 	 */
 	public function send( $email_address, $user ) {
 
+		do_action( 'come_back_before_email_sent', $this, $user );
+		
 		$message = apply_filters( 'come_back_process_smart_tags', nl2br( $this->message ), $user );
-
-		do_action( 'come_back_before_email_sent', $this );
 
 		ob_start();
 
@@ -77,7 +77,7 @@ class Email {
 
 		$sent = wp_mail( $email_address, $this->subject, $email, $this->header );
 
-		do_action( 'come_back_after_email_sent', $this );
+		do_action( 'come_back_after_email_sent', $this, $user );
 
 		update_user_meta( $user->ID, 'come_back_email_sent', time() );
 
